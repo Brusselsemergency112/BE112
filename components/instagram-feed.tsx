@@ -16,6 +16,9 @@ export default function InstagramFeed() {
     const widget = document.createElement("behold-widget");
     widget.setAttribute("feed-id", WIDGET_ID);
     container.appendChild(widget);
+    
+
+    
 
     if (!document.querySelector("script[data-behold-widget]")) {
       const script = document.createElement("script");
@@ -56,5 +59,18 @@ function InstagramPlaceholder() {
         automatiquement les derniers posts Instagram ici — voir le README.
       </p>
     </div>
+
+
+    
   );
+
+
+  <behold-widget feed-id="gzeHeGf2ggHbMDzDWJee"></behold-widget>
+<script>
+  (() => {
+    const d=document,s=d.createElement("script");s.type="module";
+    s.src="https://w.behold.so/widget.js";d.head.append(s);
+  })();
+</script>
+  
 }
