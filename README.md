@@ -1,4 +1,4 @@
-# BE112 — Ilias Remchani
+# BE112  Ilias Remchani
 
 Site photographe (portfolio, galeries privées à code, boutique) construit avec Next.js 16
 (App Router), Tailwind CSS v4 et Supabase.
