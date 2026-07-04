@@ -19,6 +19,7 @@ export default function InstagramFeed() {
 
     if (!document.querySelector("script[data-behold-widget]")) {
       const script = document.createElement("script");
+      script.type = "module";
       script.src = "https://w.behold.so/widget.js";
       script.async = true;
       script.dataset.beholdWidget = "true";
