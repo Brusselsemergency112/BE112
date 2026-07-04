@@ -6,7 +6,7 @@ import { withBrandMark } from "@/lib/utils/brand-mark";
 
 export const metadata: Metadata = {
   title: "Biographie",
-  description: "Biographie d'Ilias Remchani, photographe à Bruxelles — projet BE112.",
+  description: "Biographie d'Ilias Remchani, photographe à Bruxelles X BE112.",
 };
 
 export default function BiographiePage() {
