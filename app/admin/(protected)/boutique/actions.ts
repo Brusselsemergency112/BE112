@@ -2,13 +2,22 @@
 
 import { revalidatePath } from "next/cache";
 import { createProduct, deleteProduct, toggleProductActive } from "@/lib/data/products";
+import { isAdminAuthenticated } from "@/lib/auth/admin-session";
 
 export type CreateProductState = { status: "idle" | "error" | "success"; message?: string };
+
+async function requireAdmin(): Promise<void> {
+  if (!(await isAdminAuthenticated())) {
+    throw new Error("Non autorisé");
+  }
+}
 
 export async function createProductAction(
   _prev: CreateProductState,
   formData: FormData
 ): Promise<CreateProductState> {
+  await requireAdmin();
+
   const name = String(formData.get("name") || "").trim();
   const description = String(formData.get("description") || "").trim();
   const priceLabel = String(formData.get("priceLabel") || "").trim();
@@ -37,12 +46,14 @@ export async function createProductAction(
 }
 
 export async function toggleProductAction(id: string, active: boolean): Promise<void> {
+  await requireAdmin();
   await toggleProductActive(id, active);
   revalidatePath("/admin/boutique");
   revalidatePath("/boutique");
 }
 
 export async function deleteProductAction(id: string): Promise<void> {
+  await requireAdmin();
   await deleteProduct(id);
   revalidatePath("/admin/boutique");
   revalidatePath("/boutique");

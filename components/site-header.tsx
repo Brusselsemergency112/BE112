@@ -57,14 +57,11 @@ export default function SiteHeader() {
         <div className="mx-auto flex max-w-6xl items-center justify-between px-6 py-5 md:px-10">
           <Link
             href="/"
-            className={`font-display text-xl tracking-tight transition-colors duration-500 ${
+            className={`font-display text-lg tracking-tight transition-colors duration-500 md:text-xl ${
               scrolled || open || pathname !== "/" ? "text-ink" : "text-paper"
             }`}
           >
-            Ilias Remchani<span className="text-accent">.</span>
-            <span className="ml-2 hidden font-sans text-[11px] uppercase tracking-widest2 opacity-60 md:inline">
-              BE112
-            </span>
+            Brussels Emergency <span className="italic text-accent">112</span>
           </Link>
 
           <nav

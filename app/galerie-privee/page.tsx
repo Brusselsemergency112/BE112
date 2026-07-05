@@ -5,7 +5,8 @@ import { GALLERY_CATEGORIES } from "@/lib/site";
 
 export const metadata: Metadata = {
   title: "Espace privé",
-  description: "Accès par code aux galeries privées BE112 — Section, Medical Team, Ambulanciers, Services.",
+  description:
+    "Accès par code aux galeries privées Brussels Emergency 112 — équipes, clients et partenaires.",
 };
 
 export default function GaleriePriveePage() {

@@ -1,4 +1,4 @@
-export type GalleryCategoryValue = "section" | "medicalteam" | "ambulancier" | "services" | "autre";
+export type GalleryCategoryValue = string;
 
 export type GalleryRow = {
   id: string;

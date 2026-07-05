@@ -16,7 +16,7 @@ create table if not exists galleries (
   id uuid primary key default gen_random_uuid(),
   slug text not null unique,
   title text not null,
-  category text not null check (category in ('section', 'medicalteam', 'ambulancier', 'services', 'autre')),
+  category text not null check (char_length(category) between 1 and 60),
   code_hash text not null unique,
   code_hint text,
   duration_days integer not null check (duration_days > 0 and duration_days <= 365),

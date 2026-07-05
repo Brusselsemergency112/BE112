@@ -7,7 +7,7 @@ const SECTIONS: { title: string; body: ReactNode }[] = [
     body: (
       <p>
         Le responsable du traitement des données collectées sur ce site est Ilias Remchani
-        (BE112), joignable à l&apos;adresse{" "}
+        (Brussels Emergency 112), joignable à l&apos;adresse{" "}
         <a className="underline-hover" href={`mailto:${SITE.email}`}>{SITE.email}</a>.
       </p>
     ),

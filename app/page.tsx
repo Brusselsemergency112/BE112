@@ -2,10 +2,8 @@ import Image from "next/image";
 import Link from "next/link";
 import Reveal from "@/components/reveal";
 import InstagramFeed from "@/components/instagram-feed";
-import Marquee from "@/components/marquee";
 import { getWorks } from "@/lib/works";
-import { BIOGRAPHY } from "@/content/biographie";
-import { withBrandMark } from "@/lib/utils/brand-mark";
+import { BRAND } from "@/content/biographie";
 import { SITE, SITE_INSTAGRAM_URL } from "@/lib/site";
 
 const GRID_LAYOUT = [
@@ -39,22 +37,22 @@ export default function HomePage() {
         )}
         <div className="absolute inset-0 bg-gradient-to-t from-ink via-ink/20 to-ink/40" />
 
-        <div className="relative z-10 mx-auto w-full max-w-6xl px-6 pb-14 md:px-10 md:pb-16">
+        <div className="relative z-10 mx-auto w-full max-w-6xl px-6 pb-16 md:px-10 md:pb-24">
           <p
             className="rise-in text-[11px] uppercase tracking-widest2 text-paper/60"
             style={{ "--d": "150ms" } as React.CSSProperties}
           >
-            Photographe · Bruxelles · <span className="text-paper/90">BE112</span>
+            Photographie documentaire · Bruxelles
           </p>
           <h1 className="mt-5 font-display text-display-xl text-paper">
             <span className="rise-in block" style={{ "--d": "300ms" } as React.CSSProperties}>
-              Ilias
+              Brussels
             </span>
             <span
               className="rise-in block italic text-accent"
               style={{ "--d": "420ms" } as React.CSSProperties}
             >
-              Remchani
+              Emergency 112
             </span>
           </h1>
 
@@ -63,8 +61,12 @@ export default function HomePage() {
             style={{ "--d": "600ms" } as React.CSSProperties}
           >
             <p className="max-w-md text-sm leading-relaxed text-paper/70 md:text-base">
-              Entre photographie d&apos;auteur et regard documentaire — une exploration du réel à
-              Bruxelles, au plus près des équipes du projet BE112.
+              Au plus près des services d&apos;urgence bruxellois — un projet documentaire mené par
+              le photographe{" "}
+              <Link href="/biographie" className="underline-hover text-paper">
+                {SITE.author}
+              </Link>
+              .
             </p>
             <div className="flex items-center gap-6">
               <span className="scroll-hint text-paper/50" aria-hidden="true" />
@@ -72,28 +74,22 @@ export default function HomePage() {
             </div>
           </div>
         </div>
-
-        <div className="fade-in-slow relative z-10" style={{ "--d": "900ms" } as React.CSSProperties}>
-          <Marquee />
-        </div>
       </section>
 
       {/* STATEMENT */}
       <section className="mx-auto max-w-4xl px-6 py-32 text-center md:px-10 md:py-40">
         <Reveal>
-          <p className="text-[11px] uppercase tracking-widest2 text-mute">La démarche</p>
+          <p className="text-[11px] uppercase tracking-widest2 text-mute">Le projet</p>
         </Reveal>
         <Reveal delay={100}>
-          <p className="mt-8 font-display text-display-md text-ink">
-            {withBrandMark(BIOGRAPHY.intro)}
-          </p>
+          <p className="mt-8 font-display text-display-md text-ink">{BRAND.intro}</p>
         </Reveal>
         <Reveal delay={200} className="mt-10">
           <Link
             href="/biographie"
             className="text-xs uppercase tracking-widest2 underline-hover text-mute hover:text-ink"
           >
-            Découvrir la biographie →
+            Rencontrer le photographe →
           </Link>
         </Reveal>
       </section>
@@ -137,7 +133,7 @@ export default function HomePage() {
                   <span className="font-sans text-[10px] tabular-nums text-paper/60">
                     {String(i + 1).padStart(2, "0")}
                   </span>
-                  <span className="font-display text-lg italic">Série BE112</span>
+                  <span className="font-display text-lg italic">La série</span>
                 </span>
               </Link>
             </Reveal>
@@ -159,14 +155,19 @@ export default function HomePage() {
               <span className="font-sans text-xs tabular-nums text-mute">02</span>
               En direct d&apos;Instagram
             </h2>
-            <a
-              href={SITE_INSTAGRAM_URL}
-              target="_blank"
-              rel="noreferrer"
-              className="text-xs uppercase tracking-widest2 underline-hover"
-            >
-              Suivre @{SITE.instagramHandle} →
-            </a>
+            <div className="flex flex-wrap items-center gap-x-6 gap-y-2">
+              <a
+                href={SITE_INSTAGRAM_URL}
+                target="_blank"
+                rel="noreferrer"
+                className="text-xs uppercase tracking-widest2 underline-hover"
+              >
+                Suivre @{SITE.instagramHandle} →
+              </a>
+              <Link href="/galerie" className="text-xs uppercase tracking-widest2 underline-hover">
+                Galerie publique →
+              </Link>
+            </div>
           </div>
         </Reveal>
         <Reveal delay={100}>
@@ -181,12 +182,12 @@ export default function HomePage() {
           className="group flex flex-col justify-between gap-10 border-b border-line p-10 transition-colors duration-500 hover:bg-ink hover:text-paper md:border-b-0 md:border-r md:p-16"
         >
           <p className="text-[11px] uppercase tracking-widest2 opacity-50">
-            Section · Medical Team · Ambulanciers · Services
+            Réservé aux équipes &amp; clients
           </p>
           <div>
             <h3 className="font-display text-display-md">Espace privé</h3>
             <p className="mt-4 max-w-xs text-sm leading-relaxed opacity-60">
-              Accès par code aux galeries d&apos;intervention réservées aux équipes — photos
+              Accès par code aux galeries d&apos;intervention et de livraison — photos
               téléchargeables, supprimées automatiquement à l&apos;échéance.
             </p>
           </div>
@@ -202,15 +203,17 @@ export default function HomePage() {
           href="/boutique"
           className="group flex flex-col justify-between gap-10 p-10 transition-colors duration-500 hover:bg-ink hover:text-paper md:p-16"
         >
-          <p className="text-[11px] uppercase tracking-widest2 opacity-50">Tirages &amp; éditions</p>
+          <p className="text-[11px] uppercase tracking-widest2 opacity-50">
+            Mariage · Entreprise · Portrait · Événement
+          </p>
           <div>
-            <h3 className="font-display text-display-md">Boutique</h3>
+            <h3 className="font-display text-display-md">Réserver une séance</h3>
             <p className="mt-4 max-w-xs text-sm leading-relaxed opacity-60">
-              Une sélection de tirages et d&apos;objets issus des séries, disponibles sur demande.
+              Confiez votre projet en quelques clics — et découvrez les tirages issus des séries.
             </p>
           </div>
           <span className="flex items-center gap-4 text-xs uppercase tracking-widest2">
-            Découvrir
+            Boutique &amp; séances
             <span className="arrow-orbit flex h-10 w-10 items-center justify-center rounded-full border border-current">
               ↗
             </span>

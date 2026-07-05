@@ -60,19 +60,25 @@ export default function CreateGalleryForm() {
 
       <div>
         <label className="text-xs uppercase tracking-widest2 text-mute" htmlFor="category">
-          Catégorie
+          Section
         </label>
-        <select
+        <input
           id="category"
           name="category"
+          required
+          maxLength={60}
+          list="category-suggestions"
+          placeholder="DMP 24h Vélo, Med Team, Couleur Café…"
           className="mt-2 w-full border-b border-line bg-transparent py-2 text-sm outline-none focus:border-ink"
-        >
+        />
+        <datalist id="category-suggestions">
           {GALLERY_CATEGORIES.map((c) => (
-            <option key={c.value} value={c.value}>
-              {c.label}
-            </option>
+            <option key={c.value} value={c.label} />
           ))}
-        </select>
+        </datalist>
+        <p className="mt-1 text-[11px] text-mute">
+          Tape un nom libre — les sections existantes sont proposées automatiquement.
+        </p>
       </div>
 
       <div className="md:col-span-2">

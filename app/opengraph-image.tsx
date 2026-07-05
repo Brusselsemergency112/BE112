@@ -13,7 +13,7 @@ export default function OpengraphImage() {
           display: "flex",
           flexDirection: "column",
           justifyContent: "center",
-          background: "#16150f",
+          background: "#14130e",
           padding: "90px",
         }}
       >
@@ -26,21 +26,21 @@ export default function OpengraphImage() {
             color: "#a39d8a",
           }}
         >
-          Photographe · Bruxelles
+          Photographie documentaire · Bruxelles
         </div>
-        <div style={{ display: "flex", fontSize: 104, color: "#f8f6f0", marginTop: 22 }}>
-          Ilias Remchani
+        <div style={{ display: "flex", fontSize: 88, color: "#f7f4ec", marginTop: 26 }}>
+          Brussels Emergency 112
         </div>
         <div
           style={{
             display: "flex",
-            fontSize: 26,
+            fontSize: 24,
             color: "#c96a4d",
-            marginTop: 24,
-            letterSpacing: 6,
+            marginTop: 26,
+            letterSpacing: 4,
           }}
         >
-          BE112
+          par Ilias Remchani
         </div>
       </div>
     ),

@@ -7,7 +7,7 @@ import { SITE, SITE_INSTAGRAM_URL } from "@/lib/site";
 
 export const metadata: Metadata = {
   title: "Contact",
-  description: "Contacter Ilias Remchani — BE112. Confidentialité et RGPD.",
+  description: "Contacter Brussels Emergency 112. Confidentialité et RGPD.",
 };
 
 export default function ContactPage() {

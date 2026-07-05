@@ -1,19 +1,19 @@
 import type { Metadata } from "next";
-import { Instrument_Serif, Archivo } from "next/font/google";
+import { Fraunces, Manrope } from "next/font/google";
 import "./globals.css";
 import SiteHeader from "@/components/site-header";
 import SiteFooter from "@/components/site-footer";
 import { SITE } from "@/lib/site";
 
-const serif = Instrument_Serif({
+const serif = Fraunces({
   subsets: ["latin"],
-  weight: "400",
   style: ["normal", "italic"],
+  axes: ["opsz", "SOFT", "WONK"],
   variable: "--font-serif",
   display: "swap",
 });
 
-const grotesk = Archivo({
+const grotesk = Manrope({
   subsets: ["latin"],
   variable: "--font-grotesk",
   display: "swap",
@@ -22,12 +22,12 @@ const grotesk = Archivo({
 export const metadata: Metadata = {
   metadataBase: new URL(SITE.url),
   title: {
-    default: `${SITE.name} — Photographe, Bruxelles`,
+    default: `${SITE.name} — Photographie documentaire, Bruxelles`,
     template: `%s — ${SITE.name}`,
   },
   description: SITE.description,
   openGraph: {
-    title: `${SITE.name} — Photographe, Bruxelles`,
+    title: `${SITE.name} — Photographie documentaire, Bruxelles`,
     description: SITE.description,
     url: SITE.url,
     siteName: SITE.name,
@@ -36,15 +36,20 @@ export const metadata: Metadata = {
   },
 };
 
-const personJsonLd = {
+const jsonLd = {
   "@context": "https://schema.org",
-  "@type": "Person",
-  name: "Ilias Remchani",
-  jobTitle: "Photographe",
+  "@type": "Organization",
+  name: SITE.name,
   url: SITE.url,
   email: SITE.email,
-  address: { "@type": "PostalAddress", addressLocality: "Bruxelles", addressCountry: "BE" },
-  sameAs: [`https://instagram.com/${SITE.instagramHandle}`],
+  sameAs: [`https://instagram.com/${SITE.instagramHandle}`, SITE.linkedinUrl],
+  founder: {
+    "@type": "Person",
+    name: SITE.author,
+    jobTitle: "Photographe",
+    address: { "@type": "PostalAddress", addressLocality: "Bruxelles", addressCountry: "BE" },
+    sameAs: [SITE.linkedinUrl],
+  },
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
@@ -53,7 +58,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <body className="flex min-h-screen flex-col">
         <script
           type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(personJsonLd) }}
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
         <SiteHeader />
         <main className="flex-1">{children}</main>

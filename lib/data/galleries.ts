@@ -138,36 +138,51 @@ export async function listGalleryPhotosWithUrls(
   return withUrls;
 }
 
-export async function addGalleryPhoto(
+export type UploadTarget = {
+  filename: string;
+  storagePath: string;
+  signedUrl: string;
+};
+
+/**
+ * Direct browser-to-storage uploads: the server only mints short-lived signed
+ * upload URLs, so photo bytes never pass through the Netlify/Vercel function
+ * (whose request-body limits break multi-photo uploads).
+ */
+export async function createPhotoUploadTargets(
   gallery: GalleryRow,
-  file: File
-): Promise<GalleryPhotoRow> {
+  files: { name: string }[]
+): Promise<UploadTarget[]> {
   const client = supabaseAdmin();
-  const extension = file.name.includes(".") ? file.name.split(".").pop() : "jpg";
-  const objectName = `${randomUUID()}.${extension}`;
-  const storagePath = `${gallery.slug}/${objectName}`;
 
-  const arrayBuffer = await file.arrayBuffer();
-  const { error: uploadError } = await client.storage.from(BUCKET).upload(storagePath, arrayBuffer, {
-    contentType: file.type || "application/octet-stream",
-    upsert: false,
-  });
-  if (uploadError) throw uploadError;
-
-  const { data, error } = await client
-    .from("gallery_photos")
-    .insert({
-      gallery_id: gallery.id,
-      storage_path: storagePath,
-      filename: file.name,
-      content_type: file.type || null,
-      size_bytes: file.size,
+  return Promise.all(
+    files.map(async (file) => {
+      const extension = file.name.includes(".") ? file.name.split(".").pop() : "jpg";
+      const storagePath = `${gallery.slug}/${randomUUID()}.${extension}`;
+      const { data, error } = await client.storage.from(BUCKET).createSignedUploadUrl(storagePath);
+      if (error) throw error;
+      return { filename: file.name, storagePath, signedUrl: data.signedUrl };
     })
-    .select("*")
-    .single();
+  );
+}
 
+export async function registerGalleryPhotos(
+  galleryId: string,
+  entries: { storagePath: string; filename: string; contentType: string | null; sizeBytes: number | null }[]
+): Promise<void> {
+  if (entries.length === 0) return;
+  const { error } = await supabaseAdmin()
+    .from("gallery_photos")
+    .insert(
+      entries.map((e) => ({
+        gallery_id: galleryId,
+        storage_path: e.storagePath,
+        filename: e.filename,
+        content_type: e.contentType,
+        size_bytes: e.sizeBytes,
+      }))
+    );
   if (error) throw error;
-  return data;
 }
 
 export async function deleteGalleryPhoto(photoId: string): Promise<void> {

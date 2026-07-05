@@ -7,7 +7,8 @@ import { SITE, SITE_INSTAGRAM_URL } from "@/lib/site";
 
 export const metadata: Metadata = {
   title: "Galerie",
-  description: "Galerie publique d'Ilias Remchani — fil Instagram et sélection d'œuvres, BE112.",
+  description:
+    "Galerie publique Brussels Emergency 112 — fil Instagram et sélection d'œuvres documentaires.",
 };
 
 export default function GaleriePage() {
@@ -47,7 +48,7 @@ export default function GaleriePage() {
           <div className="mb-10 border-b border-line pb-6">
             <h2 className="flex items-baseline gap-4 font-display text-display-lg">
               <span className="font-sans text-xs tabular-nums text-mute">02</span>
-              Série <span className="font-sans text-[0.6em] tracking-wide">BE112</span>
+              La série
             </h2>
           </div>
         </Reveal>

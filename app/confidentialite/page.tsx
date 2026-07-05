@@ -4,7 +4,7 @@ import PrivacyPolicy from "@/components/privacy-policy";
 
 export const metadata: Metadata = {
   title: "Confidentialité & RGPD",
-  description: "Politique de confidentialité et RGPD du site d'Ilias Remchani — BE112.",
+  description: "Politique de confidentialité et RGPD du site Brussels Emergency 112.",
 };
 
 export default function ConfidentialitePage() {
