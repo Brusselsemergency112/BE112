@@ -45,7 +45,7 @@ function InstagramPlaceholder() {
       <p className="max-w-sm text-xs leading-relaxed text-mute">
         Renseigne <code className="text-[11px]">NEXT_PUBLIC_INSTAGRAM_WIDGET_PROVIDER</code> et{" "}
         <code className="text-[11px]">NEXT_PUBLIC_INSTAGRAM_WIDGET_ID</code> pour afficher
-        automatiquement les derniers posts Instagram ici — voir le README.
+        automatiquement les derniers posts Instagram ici, voir le README.
       </p>
     </div>
   );

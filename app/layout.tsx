@@ -22,12 +22,12 @@ const grotesk = Manrope({
 export const metadata: Metadata = {
   metadataBase: new URL(SITE.url),
   title: {
-    default: `${SITE.name} — Photographie documentaire, Bruxelles`,
-    template: `%s — ${SITE.name}`,
+    default: `${SITE.name} · Photographie documentaire, Bruxelles`,
+    template: `%s · ${SITE.name}`,
   },
   description: SITE.description,
   openGraph: {
-    title: `${SITE.name} — Photographie documentaire, Bruxelles`,
+    title: `${SITE.name} · Photographie documentaire, Bruxelles`,
     description: SITE.description,
     url: SITE.url,
     siteName: SITE.name,

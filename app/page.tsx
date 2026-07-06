@@ -2,7 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import Reveal from "@/components/reveal";
 import InstagramFeed from "@/components/instagram-feed";
-import { getWorks } from "@/lib/works";
+import { getBanners, getWorks } from "@/lib/works";
 import { BRAND } from "@/content/biographie";
 import { SITE, SITE_INSTAGRAM_URL } from "@/lib/site";
 
@@ -16,7 +16,8 @@ const GRID_LAYOUT = [
 
 export default function HomePage() {
   const works = getWorks();
-  const hero = works[0];
+  const banners = getBanners();
+  const hero = banners[0] ?? works[0];
   const selection = works.slice(1, 6);
 
   return (
@@ -61,7 +62,7 @@ export default function HomePage() {
             style={{ "--d": "600ms" } as React.CSSProperties}
           >
             <p className="max-w-md text-sm leading-relaxed text-paper/70 md:text-base">
-              Au plus près des services d&apos;urgence bruxellois — un projet documentaire mené par
+              Au plus près des services d&apos;urgence bruxellois, un projet documentaire mené par
               le photographe{" "}
               <Link href="/biographie" className="underline-hover text-paper">
                 {SITE.author}
@@ -94,7 +95,7 @@ export default function HomePage() {
         </Reveal>
       </section>
 
-      {/* SELECTION — editorial collage */}
+      {/* SELECTION, editorial collage */}
       <section className="mx-auto max-w-6xl px-6 pb-16 md:px-10">
         <Reveal>
           <div className="mb-14 flex items-end justify-between border-b border-line pb-6">
@@ -147,7 +148,7 @@ export default function HomePage() {
         </Reveal>
       </section>
 
-      {/* INSTAGRAM — GALERIE PRINCIPALE */}
+      {/* INSTAGRAM, GALERIE PRINCIPALE */}
       <section className="mx-auto max-w-6xl px-6 py-32 md:px-10">
         <Reveal>
           <div className="mb-12 flex flex-col gap-4 border-b border-line pb-6 md:flex-row md:items-end md:justify-between">
@@ -187,7 +188,7 @@ export default function HomePage() {
           <div>
             <h3 className="font-display text-display-md">Espace privé</h3>
             <p className="mt-4 max-w-xs text-sm leading-relaxed opacity-60">
-              Accès par code aux galeries d&apos;intervention et de livraison — photos
+              Accès par code aux galeries d&apos;intervention et de livraison, photos
               téléchargeables, supprimées automatiquement à l&apos;échéance.
             </p>
           </div>
@@ -209,7 +210,7 @@ export default function HomePage() {
           <div>
             <h3 className="font-display text-display-md">Réserver une séance</h3>
             <p className="mt-4 max-w-xs text-sm leading-relaxed opacity-60">
-              Confiez votre projet en quelques clics — et découvrez les tirages issus des séries.
+              Confiez votre projet en quelques clics, et découvrez les tirages issus des séries.
             </p>
           </div>
           <span className="flex items-center gap-4 text-xs uppercase tracking-widest2">

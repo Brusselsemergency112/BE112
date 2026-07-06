@@ -1,17 +1,24 @@
 export const SITE = {
   name: "Brussels Emergency 112",
   author: "Ilias Remchani",
-  tagline: "Photographie documentaire — Bruxelles",
+  tagline: "Photographie documentaire, Bruxelles",
   description:
-    "Brussels Emergency 112 — photographie documentaire au cœur des services d'urgence bruxellois. Galeries, espace privé pour les équipes, séances sur demande et tirages, par Ilias Remchani.",
-  email: process.env.NEXT_PUBLIC_CONTACT_EMAIL || "contact@brusselsemergency112.be",
+    "Brussels Emergency 112, photographie documentaire au cœur des services d'urgence bruxellois. Galeries, espace privé pour les équipes, séances sur demande et tirages, par Ilias Remchani.",
+  email: process.env.NEXT_PUBLIC_CONTACT_EMAIL || "brusselsemergency112@outlook.be",
   instagramHandle: (process.env.NEXT_PUBLIC_INSTAGRAM_HANDLE || "brusselsemergency112").replace(/^@/, ""),
   linkedinUrl:
-    process.env.NEXT_PUBLIC_LINKEDIN_URL || "https://www.linkedin.com/in/ilias-remchani",
+    process.env.NEXT_PUBLIC_LINKEDIN_URL ||
+    "https://be.linkedin.com/in/ilias-remchani-004bab301",
   url: process.env.NEXT_PUBLIC_SITE_URL || "https://www.brusselsemergency112.be",
 };
 
 export const SITE_INSTAGRAM_URL = `https://instagram.com/${SITE.instagramHandle}`;
+
+export const POSETONCASQUE = {
+  name: "Pose Ton Casque",
+  url: "https://posetoncasque.be",
+  instagram: "https://www.instagram.com/posetoncasque.brussels/",
+};
 
 export const NAV_LINKS = [
   { href: "/", label: "Accueil" },
@@ -44,13 +51,13 @@ export const BOOKING_SERVICES = [
   {
     id: "mariage",
     title: "Mariage",
-    blurb: "Un récit complet de votre journée, du matin aux dernières lumières — sobre, vrai, sans poses forcées.",
+    blurb: "Un récit complet de votre journée, du matin aux dernières lumières, sobre, vrai, sans poses forcées.",
     detail: "Couverture demi-journée ou journée complète · galerie privée de livraison incluse",
   },
   {
     id: "entreprise",
     title: "Entreprise & institutions",
-    blurb: "Reportages métier, portraits d'équipe, événements internes — une image professionnelle qui raconte le terrain.",
+    blurb: "Reportages métier, portraits d'équipe, événements internes, une image professionnelle qui raconte le terrain.",
     detail: "Sur devis · droits d'utilisation adaptés à vos supports",
   },
   {
@@ -62,7 +69,7 @@ export const BOOKING_SERVICES = [
   {
     id: "evenement",
     title: "Événement",
-    blurb: "Concerts, cérémonies, compétitions, vie associative — la couverture discrète d'un moment qui compte.",
+    blurb: "Concerts, cérémonies, compétitions, vie associative, la couverture discrète d'un moment qui compte.",
     detail: "Formule adaptée à la durée et au lieu",
   },
   {

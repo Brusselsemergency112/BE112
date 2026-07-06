@@ -91,7 +91,7 @@ export default function DeliveryGallery({
   if (items.length === 0) {
     return (
       <p className="border border-dashed border-line px-6 py-16 text-center text-sm text-mute">
-        Les photos arrivent bientôt — repasse un peu plus tard.
+        Les photos arrivent bientôt, repasse un peu plus tard.
       </p>
     );
   }

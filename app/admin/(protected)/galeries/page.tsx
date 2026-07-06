@@ -28,7 +28,7 @@ export default async function AdminGaleriesPage() {
 
       {error ? (
         <p className="border border-dashed border-line px-6 py-10 text-center text-sm text-mute">
-          Supabase n&apos;est pas configuré — renseigne les variables d&apos;environnement pour
+          Supabase n&apos;est pas configuré, renseigne les variables d&apos;environnement pour
           activer les galeries privées.
         </p>
       ) : (

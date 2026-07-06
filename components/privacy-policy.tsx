@@ -22,7 +22,7 @@ const SECTIONS: { title: string; body: ReactNode }[] = [
           vérifiée côté serveur et n&apos;est jamais stockée en clair.
         </li>
         <li>
-          Cookies techniques de session (accès admin, accès à une galerie privée) — aucun cookie
+          Cookies techniques de session (accès admin, accès à une galerie privée), aucun cookie
           de mesure d&apos;audience ou publicitaire n&apos;est déposé par défaut.
         </li>
         <li>
@@ -58,9 +58,9 @@ const SECTIONS: { title: string; body: ReactNode }[] = [
     title: "5. Destinataires et sous-traitants",
     body: (
       <p>
-        Les données sont hébergées chez Vercel Inc. (hébergement de l&apos;application) et
-        Supabase Inc. (base de données et stockage des fichiers), agissant en tant que
-        sous-traitants. Aucune donnée n&apos;est vendue ni partagée à des fins publicitaires.
+        Les données sont hébergées par l&apos;hébergeur de l&apos;application et par Supabase
+        Inc. (base de données et stockage des fichiers), agissant en tant que sous-traitants.
+        Aucune donnée n&apos;est vendue ni partagée à des fins publicitaires.
       </p>
     ),
   },
@@ -73,8 +73,36 @@ const SECTIONS: { title: string; body: ReactNode }[] = [
         Pour exercer ces droits, écris à{" "}
         <a className="underline-hover" href={`mailto:${SITE.email}`}>{SITE.email}</a>. Tu peux
         également introduire une réclamation auprès de l&apos;Autorité de protection des données
-        belge (APD — autoriteprotectiondonnees.be).
+        belge (APD, autoriteprotectiondonnees.be).
       </p>
+    ),
+  },
+  {
+    title: "7. Droits sur les images et responsabilité",
+    body: (
+      <>
+        <p>
+          Toutes les photographies présentes sur ce site sont protégées par le droit
+          d&apos;auteur. Toute reproduction, diffusion ou utilisation sans autorisation écrite
+          préalable est interdite.
+        </p>
+        <p>
+          Les galeries privées sont destinées exclusivement aux personnes ayant reçu un code
+          d&apos;accès. La personne qui reçoit un code est responsable de sa non-divulgation ;
+          l&apos;usage que des tiers font des photographies après téléchargement (partage,
+          publication, modification) relève de leur seule responsabilité et ne saurait engager
+          celle de l&apos;éditeur du site.
+        </p>
+        <p>
+          Le site est fourni « tel quel ». L&apos;éditeur ne peut être tenu responsable des
+          indisponibilités temporaires, de la perte de contenus après la date d&apos;expiration
+          annoncée d&apos;une galerie, ni des contenus des sites tiers vers lesquels des liens
+          sont proposés. Pour toute demande de retrait d&apos;image (droit à l&apos;image),
+          écris à{" "}
+          <a className="underline-hover" href={`mailto:${SITE.email}`}>{SITE.email}</a> ; elle
+          sera traitée dans les meilleurs délais.
+        </p>
+      </>
     ),
   },
 ];

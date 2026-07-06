@@ -11,11 +11,11 @@ export const dynamic = "force-dynamic";
 export const metadata: Metadata = {
   title: "Boutique & séances",
   description:
-    "Réserver une séance photo — mariage, entreprise, portrait, événement — et découvrir les tirages Brussels Emergency 112.",
+    "Réserver une séance photo, mariage, entreprise, portrait, événement, et découvrir les tirages Brussels Emergency 112.",
 };
 
 function requestMailto(product: ShopProductRow): string {
-  const subject = encodeURIComponent(`Demande — ${product.name}`);
+  const subject = encodeURIComponent(`Demande : ${product.name}`);
   const body = encodeURIComponent(
     `Bonjour,\n\nJe suis intéressé·e par « ${product.name} ». Pouvez-vous me donner plus de détails (disponibilité, tarif, délais) ?\n\nMerci,`
   );
@@ -39,7 +39,7 @@ export default async function BoutiquePage() {
           Travaillons <em className="italic text-accent">ensemble</em>
         </h1>
         <p className="mt-6 max-w-xl text-sm leading-relaxed text-mute">
-          Choisis le type de séance qui te correspond, décris ton projet en deux minutes — et
+          Choisis le type de séance qui te correspond, décris ton projet en deux minutes, et
           reçois une proposition sur mesure sous 48h. Plus bas : les tirages issus des séries.
         </p>
       </Reveal>
@@ -73,7 +73,7 @@ export default async function BoutiquePage() {
         {products.length === 0 ? (
           <Reveal>
             <p className="border border-dashed border-line px-6 py-10 text-center text-sm text-mute">
-              Les premiers tirages arrivent bientôt — en attendant, parle-nous de ta séance
+              Les premiers tirages arrivent bientôt, en attendant, parle-nous de ta séance
               ci-dessus.
             </p>
           </Reveal>

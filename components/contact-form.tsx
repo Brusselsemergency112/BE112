@@ -12,7 +12,7 @@ export default function ContactForm() {
     return (
       <div className="border border-line bg-paper-dim px-8 py-12 text-center">
         <p className="font-display text-2xl">Message envoyé.</p>
-        <p className="mt-2 text-sm text-mute">Merci — je reviens vers toi rapidement.</p>
+        <p className="mt-2 text-sm text-mute">Merci, je reviens vers toi rapidement.</p>
       </div>
     );
   }

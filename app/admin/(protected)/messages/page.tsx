@@ -23,7 +23,7 @@ export default async function AdminMessagesPage() {
 
       {error ? (
         <p className="border border-dashed border-line px-6 py-10 text-center text-sm text-mute">
-          Supabase n&apos;est pas configuré — renseigne les variables d&apos;environnement.
+          Supabase n&apos;est pas configuré, renseigne les variables d&apos;environnement.
         </p>
       ) : (
         <div className="space-y-4">

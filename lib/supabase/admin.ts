@@ -8,7 +8,7 @@ export function isSupabaseConfigured(): boolean {
 }
 
 /**
- * Server-only client using the service_role key. Bypasses RLS by design —
+ * Server-only client using the service_role key. Bypasses RLS by design;
  * never import this file from a Client Component and never leak the key.
  */
 export function supabaseAdmin(): SupabaseClient {

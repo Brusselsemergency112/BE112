@@ -18,7 +18,7 @@ export default function CreateGalleryForm() {
         <p className="text-xs uppercase tracking-widest2 text-mute">Galerie créée</p>
         <h3 className="mt-2 font-display text-2xl">{state.title}</h3>
         <p className="mt-4 text-sm text-mute">
-          Code d&apos;accès — communique-le maintenant, il ne sera plus jamais affiché :
+          Code d&apos;accès, communique-le maintenant, il ne sera plus jamais affiché :
         </p>
         <div className="mt-2 flex flex-wrap items-center gap-4">
           <code className="text-2xl tracking-[0.3em]">{state.code}</code>
@@ -54,7 +54,7 @@ export default function CreateGalleryForm() {
           required
           maxLength={200}
           className="mt-2 w-full border-b border-line bg-transparent py-2 text-sm outline-none focus:border-ink"
-          placeholder="Intervention 12 mai — Ambulanciers"
+          placeholder="Intervention 12 mai, Ambulanciers"
         />
       </div>
 
@@ -77,7 +77,7 @@ export default function CreateGalleryForm() {
           ))}
         </datalist>
         <p className="mt-1 text-[11px] text-mute">
-          Tape un nom libre — les sections existantes sont proposées automatiquement.
+          Tape un nom libre, les sections existantes sont proposées automatiquement.
         </p>
       </div>
 

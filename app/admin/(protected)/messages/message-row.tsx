@@ -12,7 +12,7 @@ export default function MessageRow({ message }: { message: ContactMessageRow }) 
       <div className="flex flex-wrap items-start justify-between gap-3">
         <div>
           <p className="font-medium">
-            {message.name} <span className="text-mute">— {message.email}</span>
+            {message.name} <span className="text-mute">· {message.email}</span>
           </p>
           {message.subject && <p className="mt-1 text-sm text-mute">{message.subject}</p>}
         </div>

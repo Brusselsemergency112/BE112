@@ -19,7 +19,7 @@ export async function accessGallery(
 
   const ip = (await headers()).get("x-forwarded-for")?.split(",")[0]?.trim() || "unknown";
   if (!rateLimit(`gallery-code:${ip}`, 10, 15 * 60 * 1000)) {
-    return { status: "error", message: "Trop de tentatives — réessaie dans quelques minutes." };
+    return { status: "error", message: "Trop de tentatives, réessaie dans quelques minutes." };
   }
 
   let gallery;

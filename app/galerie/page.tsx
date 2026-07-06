@@ -8,7 +8,7 @@ import { SITE, SITE_INSTAGRAM_URL } from "@/lib/site";
 export const metadata: Metadata = {
   title: "Galerie",
   description:
-    "Galerie publique Brussels Emergency 112 — fil Instagram et sélection d'œuvres documentaires.",
+    "Galerie publique Brussels Emergency 112, fil Instagram et sélection d'œuvres documentaires.",
 };
 
 export default function GaleriePage() {

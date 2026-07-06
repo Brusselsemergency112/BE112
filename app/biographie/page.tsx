@@ -3,15 +3,18 @@ import Link from "next/link";
 import type { Metadata } from "next";
 import Reveal from "@/components/reveal";
 import { BIOGRAPHY } from "@/content/biographie";
-import { SITE, SITE_INSTAGRAM_URL } from "@/lib/site";
+import { POSETONCASQUE, SITE, SITE_INSTAGRAM_URL } from "@/lib/site";
+import { getPortraitSrc } from "@/lib/works";
 
 export const metadata: Metadata = {
   title: "Ilias Remchani",
   description:
-    "Ilias Remchani, photographe à Bruxelles — fondateur du projet Brussels Emergency 112. Reportages, mariages, portraits et missions d'entreprise.",
+    "Ilias Remchani, photographe à Bruxelles, fondateur du projet Brussels Emergency 112, volontaire des services d'urgence et BeHeroes 2025.",
 };
 
 export default function BiographiePage() {
+  const portrait = getPortraitSrc(BIOGRAPHY.fallbackPortrait);
+
   return (
     <article className="mx-auto max-w-6xl px-6 pb-24 pt-32 md:px-10 md:pb-32 md:pt-40">
       <Reveal>
@@ -23,19 +26,21 @@ export default function BiographiePage() {
 
       <div className="mt-16 grid gap-12 md:grid-cols-[0.85fr_1.15fr] md:gap-16">
         <Reveal delay={80}>
-          <div className="relative aspect-[4/5] overflow-hidden bg-paper-dim">
-            <Image
-              src={BIOGRAPHY.portrait}
-              alt={`Portrait — ${SITE.author}`}
-              fill
-              sizes="(max-width: 768px) 100vw, 40vw"
-              className="object-cover"
-            />
-          </div>
+          {portrait && (
+            <div className="relative aspect-[4/5] overflow-hidden bg-paper-dim">
+              <Image
+                src={portrait}
+                alt={`Portrait de ${SITE.author}`}
+                fill
+                sizes="(max-width: 768px) 100vw, 40vw"
+                className="object-cover"
+              />
+            </div>
+          )}
 
           <dl className="mt-8 divide-y divide-line border-t border-line">
             {BIOGRAPHY.facts.map((fact) => (
-              <div key={fact.label} className="flex items-center justify-between py-3 text-sm">
+              <div key={fact.label} className="flex items-center justify-between gap-6 py-3 text-sm">
                 <dt className="text-mute">{fact.label}</dt>
                 <dd className="text-right text-ink">{fact.value}</dd>
               </div>
@@ -90,7 +95,58 @@ export default function BiographiePage() {
             </div>
           </Reveal>
 
-          <Reveal delay={300}>
+          {/* PRESSE */}
+          <Reveal delay={280}>
+            <div className="pt-2">
+              <p className="text-[11px] uppercase tracking-widest2 text-mute">On parle de moi</p>
+              <ul className="mt-4 space-y-3">
+                {BIOGRAPHY.press.map((item) => (
+                  <li key={item.url}>
+                    <a
+                      href={item.url}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="group flex items-baseline justify-between gap-4 border-b border-line pb-3 text-sm transition-colors hover:text-accent"
+                    >
+                      <span>{item.label}</span>
+                      <span className="arrow-orbit text-xs">↗</span>
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </Reveal>
+
+          {/* POSE TON CASQUE */}
+          <Reveal delay={320}>
+            <div className="border border-line bg-paper-dim p-7">
+              <p className="text-[11px] uppercase tracking-widest2 text-mute">Mon autre projet</p>
+              <p className="mt-3 font-display text-2xl">{POSETONCASQUE.name}</p>
+              <p className="mt-2 text-sm leading-relaxed text-mute">
+                Un projet bruxellois qui me tient à cœur, à découvrir sur son site et son Instagram.
+              </p>
+              <div className="mt-5 flex flex-wrap gap-x-6 gap-y-2">
+                <a
+                  href={POSETONCASQUE.url}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="text-xs uppercase tracking-widest2 underline-hover"
+                >
+                  posetoncasque.be →
+                </a>
+                <a
+                  href={POSETONCASQUE.instagram}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="text-xs uppercase tracking-widest2 underline-hover"
+                >
+                  @posetoncasque.brussels →
+                </a>
+              </div>
+            </div>
+          </Reveal>
+
+          <Reveal delay={360}>
             <div className="flex flex-wrap items-center gap-6 pt-4">
               <Link
                 href="/boutique"

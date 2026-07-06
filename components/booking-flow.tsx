@@ -18,7 +18,7 @@ export default function BookingFlow() {
       <div className="border border-line bg-paper-dim px-8 py-16 text-center">
         <p className="font-display text-display-md">Demande envoyée.</p>
         <p className="mx-auto mt-4 max-w-md text-sm leading-relaxed text-mute">
-          Merci pour ta confiance — une réponse personnalisée arrive sous 48h avec une
+          Merci pour ta confiance, une réponse personnalisée arrive sous 48h avec une
           proposition adaptée à ton projet. En cas d&apos;urgence, écris directement à{" "}
           <a href={`mailto:${SITE.email}`} className="underline-hover text-ink">
             {SITE.email}
@@ -31,7 +31,7 @@ export default function BookingFlow() {
 
   return (
     <div>
-      {/* Étape 1 — choix du type de séance */}
+      {/* Étape 1, choix du type de séance */}
       <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
         {BOOKING_SERVICES.map((s, i) => {
           const active = selected === s.id;
@@ -71,7 +71,7 @@ export default function BookingFlow() {
         })}
       </div>
 
-      {/* Étape 2 — coordonnées et détails */}
+      {/* Étape 2, coordonnées et détails */}
       <div ref={formRef} className={service ? "mt-10" : "hidden"}>
         {service && (
           <form action={formAction} className="border border-line p-8 md:p-10" noValidate>
@@ -133,7 +133,7 @@ export default function BookingFlow() {
                 <span className="arrow-orbit">↗</span>
               </button>
               <p className="max-w-xs text-[11px] leading-relaxed text-mute">
-                Réponse personnalisée sous 48h — aucune obligation, le devis est gratuit.
+                Réponse personnalisée sous 48h, aucune obligation, le devis est gratuit.
               </p>
             </div>
           </form>

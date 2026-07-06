@@ -72,7 +72,7 @@ export default function UploadPhotosForm({ galleryId }: { galleryId: string }) {
     if (failed.length > 0) {
       setPhase("error");
       setMessage(
-        `${registered.length} photo(s) envoyée(s), ${failed.length} en échec : ${failed.slice(0, 3).join(", ")}${failed.length > 3 ? "…" : ""} — réessaie pour celles-ci.`
+        `${registered.length} photo(s) envoyée(s), ${failed.length} en échec : ${failed.slice(0, 3).join(", ")}${failed.length > 3 ? "…" : ""}, réessaie pour celles-ci.`
       );
     } else {
       setPhase("done");
@@ -103,7 +103,7 @@ export default function UploadPhotosForm({ galleryId }: { galleryId: string }) {
         <p className={`text-sm ${phase === "error" ? "text-accent" : "text-mute"}`}>{message}</p>
       )}
       <p className="text-[11px] text-mute">
-        Les photos partent directement vers le stockage sécurisé — pas de limite de taille
+        Les photos partent directement vers le stockage sécurisé, pas de limite de taille
         d&apos;envoi, jusqu&apos;à 100 photos à la fois.
       </p>
     </div>

@@ -39,7 +39,7 @@ export async function submitBookingAction(
 
   const ip = (await headers()).get("x-forwarded-for")?.split(",")[0]?.trim() || "unknown";
   if (!rateLimit(`booking:${ip}`, 5, 10 * 60 * 1000)) {
-    return { status: "error", message: "Trop de demandes — réessaie dans quelques minutes." };
+    return { status: "error", message: "Trop de demandes, réessaie dans quelques minutes." };
   }
 
   const lines = [`Type de séance : ${service.title}`];
@@ -52,7 +52,7 @@ export async function submitBookingAction(
     await createContactMessage({
       name,
       email,
-      subject: `Réservation — ${service.title}`,
+      subject: `Réservation : ${service.title}`,
       message,
     });
     return { status: "success" };
@@ -60,7 +60,7 @@ export async function submitBookingAction(
     console.error("submitBooking failed", err);
     return {
       status: "error",
-      message: "Une erreur est survenue — réessaie ou écris-nous directement par e-mail.",
+      message: "Une erreur est survenue, réessaie ou écris-nous directement par e-mail.",
     };
   }
 }

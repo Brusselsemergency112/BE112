@@ -37,7 +37,7 @@ export async function submitContactForm(
 
   const ip = (await headers()).get("x-forwarded-for")?.split(",")[0]?.trim() || "unknown";
   if (!rateLimit(`contact:${ip}`, 5, 10 * 60 * 1000)) {
-    return { status: "error", message: "Trop de tentatives — réessaie dans quelques minutes." };
+    return { status: "error", message: "Trop de tentatives, réessaie dans quelques minutes." };
   }
 
   try {

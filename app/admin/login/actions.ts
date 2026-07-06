@@ -15,7 +15,7 @@ export async function adminLogin(
 
   const ip = (await headers()).get("x-forwarded-for")?.split(",")[0]?.trim() || "unknown";
   if (!rateLimit(`admin-login:${ip}`, 8, 15 * 60 * 1000)) {
-    return { status: "error", message: "Trop de tentatives — réessaie dans quelques minutes." };
+    return { status: "error", message: "Trop de tentatives, réessaie dans quelques minutes." };
   }
 
   if (!password || !checkAdminPassword(password)) {
