@@ -7,7 +7,7 @@ import { slugify } from "@/lib/utils/slug";
 import type { GalleryCategory } from "@/lib/site";
 
 const BUCKET = "private-photos";
-const SIGNED_URL_TTL_SECONDS = 600;
+const SIGNED_URL_TTL_SECONDS = 2 * 60 * 60; // long enough for a full viewing session
 
 export async function listGalleries(): Promise<(GalleryRow & { photo_count: number })[]> {
   const { data, error } = await supabaseAdmin()
@@ -200,6 +200,47 @@ export async function deleteGalleryPhoto(photoId: string): Promise<void> {
 
   const { error } = await client.from("gallery_photos").delete().eq("id", photoId);
   if (error) throw error;
+}
+
+export async function listFavoritePhotoIds(galleryId: string): Promise<string[]> {
+  const { data, error } = await supabaseAdmin()
+    .from("gallery_favorites")
+    .select("photo_id")
+    .eq("gallery_id", galleryId);
+  if (error) throw error;
+  return (data ?? []).map((row) => row.photo_id);
+}
+
+export async function toggleGalleryFavorite(galleryId: string, photoId: string): Promise<boolean> {
+  const client = supabaseAdmin();
+
+  const { data: photo, error: photoError } = await client
+    .from("gallery_photos")
+    .select("id")
+    .eq("id", photoId)
+    .eq("gallery_id", galleryId)
+    .maybeSingle();
+  if (photoError) throw photoError;
+  if (!photo) throw new Error("Photo introuvable dans cette galerie");
+
+  const { data: existing, error: fetchError } = await client
+    .from("gallery_favorites")
+    .select("id")
+    .eq("photo_id", photoId)
+    .maybeSingle();
+  if (fetchError) throw fetchError;
+
+  if (existing) {
+    const { error } = await client.from("gallery_favorites").delete().eq("id", existing.id);
+    if (error) throw error;
+    return false;
+  }
+
+  const { error } = await client
+    .from("gallery_favorites")
+    .insert({ gallery_id: galleryId, photo_id: photoId });
+  if (error) throw error;
+  return true;
 }
 
 export async function pruneExpiredGalleries(): Promise<{ deletedGalleries: number; deletedPhotos: number }> {

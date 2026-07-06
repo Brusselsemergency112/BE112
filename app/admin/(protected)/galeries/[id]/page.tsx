@@ -1,6 +1,10 @@
 import { notFound } from "next/navigation";
 import Link from "next/link";
-import { getGalleryById, listGalleryPhotosWithUrls } from "@/lib/data/galleries";
+import {
+  getGalleryById,
+  listFavoritePhotoIds,
+  listGalleryPhotosWithUrls,
+} from "@/lib/data/galleries";
 import { categoryLabel } from "@/lib/site";
 import UploadPhotosForm from "./upload-photos-form";
 import DeletePhotoButton from "./delete-photo-button";
@@ -16,7 +20,11 @@ export default async function AdminGalleryDetailPage({
   const gallery = await getGalleryById(id);
   if (!gallery) notFound();
 
-  const photos = await listGalleryPhotosWithUrls(id);
+  const [photos, favoriteIds] = await Promise.all([
+    listGalleryPhotosWithUrls(id),
+    listFavoritePhotoIds(id).catch(() => [] as string[]),
+  ]);
+  const favoriteSet = new Set(favoriteIds);
 
   return (
     <div className="space-y-10">
@@ -29,9 +37,15 @@ export default async function AdminGalleryDetailPage({
         <p className="mt-1 text-xs text-mute">
           Code {gallery.code_hint} · expire le {new Date(gallery.expires_at).toLocaleDateString("fr-BE")} ·{" "}
           <Link href={`/galerie-privee/${gallery.slug}`} className="underline-hover">
-            voir la page publique
+            voir la page client
           </Link>
         </p>
+        {favoriteSet.size > 0 && (
+          <p className="mt-2 text-xs text-accent">
+            ♥ Sélection du client : {favoriteSet.size} photo{favoriteSet.size > 1 ? "s" : ""} (marquées
+            ci-dessous)
+          </p>
+        )}
       </div>
 
       <UploadPhotosForm galleryId={gallery.id} />
@@ -41,6 +55,11 @@ export default async function AdminGalleryDetailPage({
           <div key={p.id} className="group relative aspect-square overflow-hidden bg-paper-dim">
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img src={p.viewUrl} alt={p.filename} className="h-full w-full object-cover" />
+            {favoriteSet.has(p.id) && (
+              <span className="absolute left-2 top-2 flex h-7 w-7 items-center justify-center rounded-full bg-accent text-sm text-paper">
+                ♥
+              </span>
+            )}
             <div className="absolute inset-0 flex items-end justify-end bg-ink/0 p-2 opacity-0 transition group-hover:bg-ink/40 group-hover:opacity-100">
               <DeletePhotoButton galleryId={gallery.id} photoId={p.id} />
             </div>

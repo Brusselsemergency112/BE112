@@ -43,6 +43,17 @@ create index if not exists gallery_photos_gallery_id_idx on gallery_photos (gall
 alter table galleries enable row level security;
 alter table gallery_photos enable row level security;
 
+-- Sélection "coup de cœur" du client dans une galerie de livraison
+create table if not exists gallery_favorites (
+  id uuid primary key default gen_random_uuid(),
+  gallery_id uuid not null references galleries (id) on delete cascade,
+  photo_id uuid not null references gallery_photos (id) on delete cascade,
+  created_at timestamptz not null default now(),
+  unique (photo_id)
+);
+
+alter table gallery_favorites enable row level security;
+
 -- ---------------------------------------------------------------------------
 -- Boutique (catalogue, sans paiement en ligne — demande par e-mail)
 -- ---------------------------------------------------------------------------
