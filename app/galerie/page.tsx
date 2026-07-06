@@ -11,8 +11,8 @@ export const metadata: Metadata = {
     "Galerie publique Brussels Emergency 112, fil Instagram et sélection d'œuvres documentaires.",
 };
 
-export default function GaleriePage() {
-  const works = getWorks();
+export default async function GaleriePage() {
+  const works = await getWorks();
 
   return (
     <div className="mx-auto max-w-6xl px-6 pb-24 pt-32 md:px-10 md:pb-32 md:pt-40">
@@ -53,7 +53,15 @@ export default function GaleriePage() {
           </div>
         </Reveal>
         <Reveal delay={80}>
-          <MasonryLightbox items={works.map((w) => ({ id: w.src, src: w.src, alt: w.alt }))} />
+          <MasonryLightbox
+            items={works.map((w) => ({
+              id: w.src,
+              src: w.src,
+              alt: w.alt,
+              width: w.width,
+              height: w.height,
+            }))}
+          />
         </Reveal>
       </section>
     </div>

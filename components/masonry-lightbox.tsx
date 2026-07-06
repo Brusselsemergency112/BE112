@@ -1,11 +1,14 @@
 "use client";
 
+import Image from "next/image";
 import { useEffect, useState } from "react";
 
 export type MasonryItem = {
   id: string;
   src: string;
   alt: string;
+  width?: number;
+  height?: number;
   downloadHref?: string;
   downloadName?: string;
 };
@@ -56,14 +59,25 @@ export default function MasonryLightbox({ items }: { items: MasonryItem[] }) {
             aria-label={`Agrandir la photo ${i + 1}`}
             className="group relative mb-5 block w-full break-inside-avoid overflow-hidden bg-paper-dim text-left"
           >
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
-              src={item.src}
-              alt={item.alt}
-              loading="lazy"
-              decoding="async"
-              className="img-zoom w-full"
-            />
+            {item.width && item.height ? (
+              <Image
+                src={item.src}
+                alt={item.alt}
+                width={item.width}
+                height={item.height}
+                sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                className="img-zoom h-auto w-full"
+              />
+            ) : (
+              // eslint-disable-next-line @next/next/no-img-element
+              <img
+                src={item.src}
+                alt={item.alt}
+                loading="lazy"
+                decoding="async"
+                className="img-zoom w-full"
+              />
+            )}
             <span className="caption-veil absolute bottom-3 right-3 bg-ink/70 px-2.5 py-1 font-sans text-[10px] tabular-nums tracking-widest2 text-paper">
               {String(i + 1).padStart(2, "0")} / {String(items.length).padStart(2, "0")}
             </span>
@@ -106,16 +120,31 @@ export default function MasonryLightbox({ items }: { items: MasonryItem[] }) {
             </div>
           </div>
 
-          <div className="flex flex-1 items-center justify-center px-4 pb-10">
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
-              key={active.id}
-              src={active.src}
-              alt={active.alt}
-              className="fade-in-slow max-h-full max-w-full object-contain"
-              style={{ "--d": "0ms" } as React.CSSProperties}
-              onClick={(e) => e.stopPropagation()}
-            />
+          <div className="relative flex flex-1 items-center justify-center px-4 pb-10">
+            {active.width && active.height ? (
+              <Image
+                key={active.id}
+                src={active.src}
+                alt={active.alt}
+                width={active.width}
+                height={active.height}
+                sizes="100vw"
+                quality={85}
+                className="fade-in-slow max-h-full max-w-full object-contain"
+                style={{ "--d": "0ms" } as React.CSSProperties}
+                onClick={(e) => e.stopPropagation()}
+              />
+            ) : (
+              // eslint-disable-next-line @next/next/no-img-element
+              <img
+                key={active.id}
+                src={active.src}
+                alt={active.alt}
+                className="fade-in-slow max-h-full max-w-full object-contain"
+                style={{ "--d": "0ms" } as React.CSSProperties}
+                onClick={(e) => e.stopPropagation()}
+              />
+            )}
           </div>
 
           {items.length > 1 && (

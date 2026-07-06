@@ -14,9 +14,8 @@ const GRID_LAYOUT = [
   "md:col-span-3 aspect-[3/4] md:-mt-10",
 ];
 
-export default function HomePage() {
-  const works = getWorks();
-  const banners = getBanners();
+export default async function HomePage() {
+  const [works, banners] = await Promise.all([getWorks(), getBanners()]);
   const hero = banners[0] ?? works[0];
   const selection = works.slice(1, 6);
 

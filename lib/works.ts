@@ -1,11 +1,29 @@
 import { existsSync, readdirSync, statSync } from "fs";
 import path from "path";
+import sharp from "sharp";
 
 const PUBLIC_DIR = path.join(process.cwd(), "public");
 const MIN_VALID_SIZE_BYTES = 10_000; // skip corrupt/placeholder files
 const IMAGE_RE = /\.(jpe?g|png|webp|avif)$/i;
 
-export type WorkImage = { src: string; alt: string };
+export type WorkImage = { src: string; alt: string; width: number; height: number };
+
+const dimsCache = new Map<string, { width: number; height: number }>();
+
+async function readDims(absPath: string): Promise<{ width: number; height: number }> {
+  const cached = dimsCache.get(absPath);
+  if (cached) return cached;
+  try {
+    const meta = await sharp(absPath).metadata();
+    const dims = { width: meta.width || 1600, height: meta.height || 1067 };
+    dimsCache.set(absPath, dims);
+    return dims;
+  } catch {
+    const dims = { width: 1600, height: 1067 };
+    dimsCache.set(absPath, dims);
+    return dims;
+  }
+}
 
 function listImages(folder: string): string[] {
   const dir = path.join(PUBLIC_DIR, folder);
@@ -32,22 +50,30 @@ function listImages(folder: string): string[] {
   return files;
 }
 
-export function getWorks(): WorkImage[] {
-  return listImages("works").map((f, i) => ({
-    src: `/works/${f}`,
-    alt: `Brussels Emergency 112, photographie ${i + 1}, par Ilias Remchani`,
-  }));
+async function collect(folder: string, altPrefix: string): Promise<WorkImage[]> {
+  const files = listImages(folder);
+  return Promise.all(
+    files.map(async (f, i) => {
+      const dims = await readDims(path.join(PUBLIC_DIR, folder, f));
+      return {
+        src: `/${folder}/${f}`,
+        alt: `${altPrefix} ${i + 1}, par Ilias Remchani`,
+        ...dims,
+      };
+    })
+  );
+}
+
+export function getWorks(): Promise<WorkImage[]> {
+  return collect("works", "Brussels Emergency 112, photographie");
 }
 
 /**
  * Landscape "epic" edits meant for full-width banners (hero sections).
  * Drop files into public/banners/ ; ordered by number in filename.
  */
-export function getBanners(): WorkImage[] {
-  return listImages("banners").map((f, i) => ({
-    src: `/banners/${f}`,
-    alt: `Brussels Emergency 112, bannière ${i + 1}, par Ilias Remchani`,
-  }));
+export function getBanners(): Promise<WorkImage[]> {
+  return collect("banners", "Brussels Emergency 112, bannière");
 }
 
 /** First image found in public/portrait/, else the provided fallback. */
